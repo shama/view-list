@@ -1,0 +1,62 @@
+var ViewList = require('./index.js')
+
+var h = require('virtual-dom/h')
+var diff = require('virtual-dom/diff')
+var patch = require('virtual-dom/patch')
+var createElement = require('virtual-dom/create-element')
+var raf = require('raf')
+
+// Create 200k mock rows
+var data = []
+var amt = 200000
+for (var i = 0; i < amt; i++) {
+  data.push({
+    name: 'user ' + parseInt(Math.random() * 9, 10),
+    message: 'row #' + i
+  })
+}
+
+// Create a hook that starts the list at the bottom
+var Onload = function () {}
+Onload.prototype.hook = function (node, propertyName, previousValue) {
+  setTimeout(function () {
+    node.scrollTop = node.scrollHeight
+  }, 0)
+}
+
+// Customize an instance of our view list
+var viewlist = new ViewList({
+  className: 'view-list',
+  data: data,
+  onload: new Onload(),
+  eachrow: function (row) {
+    return h(this.childTagName, {
+      style: { height: this.rowHeight }
+    }, [
+      h('strong', [row.name + ': ']),
+      row.message
+    ])
+  }
+})
+
+// Our app render function
+function render () {
+  return h('div', [
+    'With ' + amt + ' rows:',
+    viewlist.render()
+  ])
+}
+
+// Initial DOM tree render
+var tree = render()
+var rootNode = createElement(tree)
+document.body.appendChild(rootNode)
+
+// Main render loop
+raf(function tick () {
+  var newTree = render()
+  var patches = diff(tree, newTree)
+  rootNode = patch(rootNode, patches)
+  tree = newTree
+  raf(tick)
+})

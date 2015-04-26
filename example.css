@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+.view-list {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #333;
+}
+.view-list li {
+  list-style: none;
+  border-bottom: 1px solid #ddd;
+  padding: .5em;
+}
