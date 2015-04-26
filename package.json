@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "live": "budo example.js --live",
+    "gh": "browserify example.js -o bundle.js",
     "test": "standard"
   },
   "author": "Kyle Robinson Young <kyle@dontkry.com> (http://dontkry.com)",

@@ -4,6 +4,8 @@ An infinite scrolling virtual DOM list view.
 
 ## Example
 
+View a live example displaying 200k rows: [http://shama.github.io/view-list](http://shama.github.io/view-list)
+
 Render the ViewList using virtual-dom:
 
 ```js
