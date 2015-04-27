@@ -1,8 +1,11 @@
 var h = require('virtual-dom/h')
 var xtend = require('xtend/mutable')
+var inherits = require('inherits')
+var Writable = require('stream').Writable
 
 function ViewList (params) {
   if (!(this instanceof ViewList)) return new ViewList(params)
+  Writable.call(this, { objectMode: true })
   var self = this
 
   // Calculate height outside of the style.height
@@ -12,6 +15,9 @@ function ViewList (params) {
       self.height = node.offsetHeight
     }, 10)
   }
+
+  // All the data displayed in the view
+  this._data = []
 
   xtend(this, {
     tagName: 'ul',
@@ -37,11 +43,12 @@ function ViewList (params) {
     _displayEnd: 0
   }, params)
 }
+inherits(ViewList, Writable)
 module.exports = ViewList
 
 // Calculate the view of the total data on scroll
-ViewList.prototype._calculateScroll = function (data) {
-  var total = data.length
+ViewList.prototype._calculateScroll = function () {
+  var total = this._data.length
   var rowsPerBody = Math.floor((this.height - 2) / this.rowHeight)
   this._visibleStart = Math.round(Math.floor(this._scrollTop / this.rowHeight))
   this._visibleEnd = Math.round(Math.min(this._visibleStart + rowsPerBody))
@@ -49,13 +56,18 @@ ViewList.prototype._calculateScroll = function (data) {
   this._displayEnd = Math.round(Math.min(this._displayStart + 4 * rowsPerBody, total))
 }
 
-ViewList.prototype.render = function (data) {
+ViewList.prototype._write = function (chunk, enc, cb) {
+  this._data.push(chunk)
+  cb()
+}
+
+ViewList.prototype.render = function () {
   var self = this
 
-  this._calculateScroll(data)
+  this._calculateScroll()
 
   // Slice off rows and create elements for each
-  var rows = data.slice(this._displayStart, this._displayEnd)
+  var rows = this._data.slice(this._displayStart, this._displayEnd)
   rows = rows.map(function (row) {
     return self.eachrow.call(self, row)
   })
@@ -74,7 +86,7 @@ ViewList.prototype.render = function (data) {
   rows.push(h(self.childTagName, {
     className: 'bottom',
     style: {
-      height: (data.length - this._displayEnd) * this.rowHeight,
+      height: (this._data.length - this._displayEnd) * this.rowHeight,
       padding: 0,
       margin: 0
     }

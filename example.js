@@ -6,16 +6,6 @@ var patch = require('virtual-dom/patch')
 var createElement = require('virtual-dom/create-element')
 var raf = require('raf')
 
-// Create 200k mock rows
-var data = []
-var amt = 200000
-for (var i = 0; i < amt; i++) {
-  data.push({
-    name: 'user ' + parseInt(Math.random() * 9, 10),
-    message: 'row #' + i
-  })
-}
-
 // Create a hook that starts the list at the bottom
 var Onload = function () {}
 Onload.prototype.hook = function (node, propertyName, previousValue) {
@@ -38,11 +28,30 @@ var viewlist = new ViewList({
   }
 })
 
+// Add some initial data to viewlist
+var amt = 200000
+for (var i = 0; i < amt; i++) {
+  viewlist.write({
+    name: 'user ' + parseInt(Math.random() * 9, 10),
+    message: 'This is my message #' + i
+  })
+}
+
+// Add a new row every 1s
+setInterval(function() {
+  i++
+  viewlist.write({
+    name: 'user ' + parseInt(Math.random() * 9, 10),
+    message: 'This is my message #' + i
+  })
+}, 1000)
+
+
 // Our app render function
 function render () {
   return h('div', [
-    'With ' + amt + ' rows:',
-    viewlist.render(data)
+    'With ' + i + ' rows:',
+    viewlist.render()
   ])
 }
 
