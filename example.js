@@ -27,7 +27,6 @@ Onload.prototype.hook = function (node, propertyName, previousValue) {
 // Customize an instance of our view list
 var viewlist = new ViewList({
   className: 'view-list',
-  data: data,
   onload: new Onload(),
   eachrow: function (row) {
     return h(this.childTagName, {
@@ -43,7 +42,7 @@ var viewlist = new ViewList({
 function render () {
   return h('div', [
     'With ' + amt + ' rows:',
-    viewlist.render()
+    viewlist.render(data)
   ])
 }
 

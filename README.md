@@ -16,14 +16,12 @@ var patch = require('virtual-dom/patch')
 var createElement = require('virtual-dom/create-element')
 var raf = require('raf')
 
-// Customize an instance of our view list
-var viewlist = new ViewList({
-  data: ['one', 'two', 'three'],
-})
+// Create an instance of our view list
+var viewlist = new ViewList()
 
 // Main render function
 function render () {
-  return viewlist.render()
+  return viewlist.render(['one', 'two', 'three'])
 }
 
 // Initial DOM tree render
@@ -47,7 +45,6 @@ raf(function tick () {
 
 `params` can be (in addition to the `virtual-dom` parameters):
 
-* `data`: An array of all your rows.
 * `tagName`: The tag to use. Default `'ul'`.
 * `childTagName`: The tag to use for child elements. Default `'li'`.
 * `className`: The classes to use on main element. Default `'view-list'`.
