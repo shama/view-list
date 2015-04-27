@@ -20,12 +20,16 @@ function ViewList (params) {
   this._data = []
 
   xtend(this, {
+    target: null,
     tagName: 'ul',
     childTagName: 'li',
     className: 'view-list',
     onHeight: new OnHeight(),
     onscroll: function () {
       self._scrollTop = this.scrollTop
+      if (self.target && typeof self.target.emit === 'function') {
+        self.target.emit('scroll', this)
+      }
     },
     eachrow: function (row) {
       return h(this.childTagName, {
