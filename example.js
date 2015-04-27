@@ -39,10 +39,9 @@ for (var i = 0; i < amt; i++) {
 
 // Add a new row every 1s
 setInterval(function() {
-  i++
   viewlist.write({
     name: 'user ' + parseInt(Math.random() * 9, 10),
-    message: 'This is my message #' + i
+    message: 'This is my message #' + i++
   })
 }, 1000)
 

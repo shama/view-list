@@ -61,8 +61,12 @@ ViewList.prototype._write = function (chunk, enc, cb) {
   cb()
 }
 
-ViewList.prototype.render = function () {
+ViewList.prototype.render = function (data) {
   var self = this
+
+  // If data passed into render, replace all data with it
+  // as they are not using streams
+  if (data) this._data = data
 
   this._calculateScroll()
 

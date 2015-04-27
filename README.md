@@ -1,6 +1,6 @@
 # view-list
 
-An infinite scrolling virtual DOM list view.
+A writable stream that builds an infinite scrolling virtual DOM list view.
 
 ## Example
 
@@ -21,8 +21,14 @@ var viewlist = new ViewList()
 
 // Main render function
 function render () {
-  return viewlist.render(['one', 'two', 'three'])
+  return viewlist.render()
 }
+
+// Every second, write a new row
+var i = 0
+setInterval(function() {
+  viewlist.write('row ' + i++)
+}, 1000)
 
 // Initial DOM tree render
 var tree = render()
