@@ -4,19 +4,20 @@ var xtend = require('xtend/mutable')
 function ViewList (params) {
   if (!(this instanceof ViewList)) return new ViewList(params)
   var self = this
-  Object.defineProperty(this, 'height', {
-    get: function() {
-      return this.style.height || 0
-    },
-    set: function(val) {
-      this.style.height = val || 0
-    }
-  })
+
+  // Calculate height outside of the style.height
+  function OnHeight() {}
+  OnHeight.prototype.hook = function(node) {
+    setTimeout(function() {
+      self.height = node.offsetHeight
+    }, 10)
+  }
+
   xtend(this, {
     tagName: 'ul',
     childTagName: 'li',
     className: 'view-list',
-    data: [],
+    onHeight: new OnHeight(),
     onscroll: function () {
       self._scrollTop = this.scrollTop
     },
@@ -27,11 +28,8 @@ function ViewList (params) {
         }
       }, [row])
     },
+    height: 500,
     rowHeight: 30,
-    style: {
-      height: 500,
-      overflow: 'auto'
-    },
     _scrollTop: 0,
     _visibleStart: 0,
     _visibleEnd: 0,

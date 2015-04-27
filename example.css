@@ -8,6 +8,8 @@ body {
 .view-list {
   margin: 0;
   padding: 0;
+  overflow: auto;
+  height: 500px;
   border: 1px solid #333;
 }
 .view-list li {
