@@ -22,6 +22,11 @@ var data = ['one', 'two', 'three']
 // Render the data
 viewlist.render(data)
 
+// Listen for scroll events coming up
+viewlist.on('scroll', function (element) {
+  console.log('List was scrolled to ' + element.scrollTop)
+})
+
 // Every second, append a new row
 var i = 0
 setInterval(function() {
