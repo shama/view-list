@@ -59,5 +59,12 @@ setInterval(function() {
   }
   ```
 
+#### Events
+
+Listen for events with `list.on(name, function () {})`.
+
+* `load`: Called when element has loaded.
+* `scroll`: Called when element has been scrolled.
+
 # license
 (c) 2015 Kyle Robinson Young. MIT License
