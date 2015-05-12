@@ -88,5 +88,5 @@ ViewList.prototype.render = function (data) {
     }
   }))
 
-  return self.super(self.html(self.tagName, self, rows))
+  return self.afterRender(self.html(self.tagName, self, rows))
 }

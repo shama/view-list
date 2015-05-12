@@ -4,7 +4,7 @@
   "description": "An infinite scrolling list view element built on a virtual DOM.",
   "main": "index.js",
   "scripts": {
-    "live": "budo example.js --live",
+    "start": "budo example.js --live",
     "gh": "browserify example.js -o bundle.js",
     "test": "standard"
   },
@@ -15,7 +15,7 @@
     "url": "git@github.com:shama/view-list.git"
   },
   "dependencies": {
-    "base-element": "^1.0.1",
+    "base-element": "^2.1.1",
     "inherits": "^2.0.1",
     "xtend": "^4.0.0"
   },
