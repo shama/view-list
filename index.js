@@ -1,6 +1,6 @@
-var BaseElement = require('base-element')
-var xtend = require('xtend/mutable')
-var inherits = require('inherits')
+const BaseElement = require('base-element')
+const xtend = require('xtend/mutable')
+const inherits = require('inherits')
 
 function ViewList (params) {
   var self = this
@@ -89,4 +89,19 @@ ViewList.prototype.render = function (data) {
   }))
 
   return self.afterRender(self.html(self.tagName, self, rows))
+}
+
+ViewList.prototype.css = function () {
+  let tagName = this.tagName
+  let childTagName = this.childTagName
+  return this.attachCSS(`
+    ${tagName} {
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+    }
+    ${tagName} ${childTagName} {
+      list-style: none;
+    }
+  `)
 }

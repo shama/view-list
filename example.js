@@ -1,6 +1,7 @@
 var ViewList = require('./index.js')
 var through = require('through2')
 var debounce = require('lodash.debounce')
+var style
 
 // Create an instance of our view list
 var viewlist = new ViewList({
@@ -20,7 +21,15 @@ viewlist.on('load', function (node) {
 
 // Create a throttled render function as this is being put into
 // on('data') for convenience but we dont want to render every time
-var render = debounce(viewlist.render.bind(viewlist), 100)
+var render = debounce(function () {
+  viewlist.render.apply(viewlist, arguments)
+  if (!style) {
+    // Create an inline stylesheet (should be nonce'd or written out but this is quick)
+    style = document.createElement('style')
+    style.innerHTML = viewlist.css()
+    document.head.appendChild(style)
+  }
+}, 100)
 
 // Our data model can be a stream
 var all = []
