@@ -49,8 +49,8 @@ module.exports = ViewList
 
 // Calculate the view of the total data on scroll
 ViewList.prototype._calculateScroll = function (data) {
-  var total = data.length
-  var rowsPerBody = Math.floor((this.height - 2) / this.rowHeight)
+  let total = data.length
+  let rowsPerBody = Math.floor((this.height - 2) / this.rowHeight)
   this._visibleStart = Math.round(Math.floor(this._scrollTop / this.rowHeight))
   this._visibleEnd = Math.round(Math.min(this._visibleStart + rowsPerBody))
   this._displayStart = Math.round(Math.max(0, Math.floor(this._scrollTop / this.rowHeight) - rowsPerBody * 1.5))
@@ -58,37 +58,36 @@ ViewList.prototype._calculateScroll = function (data) {
 }
 
 ViewList.prototype.render = function (data) {
-  var self = this
-  self._lastData = data
-  self._calculateScroll(data)
+  this._lastData = data
+  this._calculateScroll(data)
 
   // Slice off rows and create elements for each
-  var rows = data.slice(self._displayStart, self._displayEnd)
-  rows = rows.map(function (row) {
-    return self.eachrow.call(self, row)
+  let rows = data.slice(this._displayStart, this._displayEnd)
+  rows = rows.map((row) => {
+    return this.eachrow.call(this, row)
   })
 
   // Calculate top row
-  rows.unshift(self.html(self.childTagName, {
+  rows.unshift(this.html(this.childTagName, {
     className: 'top',
     style: {
-      height: self._displayStart * self.rowHeight,
+      height: this._displayStart * this.rowHeight,
       padding: 0,
       margin: 0
     }
   }))
 
   // Calculate bottom row
-  rows.push(self.html(self.childTagName, {
+  rows.push(this.html(this.childTagName, {
     className: 'bottom',
     style: {
-      height: (data.length - self._displayEnd) * self.rowHeight,
+      height: (data.length - this._displayEnd) * this.rowHeight,
       padding: 0,
       margin: 0
     }
   }))
 
-  return self.afterRender(self.html(self.tagName, self, rows))
+  return this.afterRender(this.html(this.tagName, this, rows))
 }
 
 ViewList.prototype.css = function () {
