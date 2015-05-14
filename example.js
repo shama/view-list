@@ -31,8 +31,17 @@ var render = debounce(function () {
   }
 }, 100)
 
-// Our data model can be a stream
+// Add some initial data to viewlist
 var all = []
+for (var i = 0; i < 200000; i++) {
+  all.push({
+    name: 'user ',
+    message: 'This is my message #' + i
+  })
+}
+render(all)
+
+// Our data model can be a stream
 var model = through.obj(function (chunk, enc, cb) {
   chunk.name += parseInt(Math.random() * 9, 10)
   this.push(chunk)
@@ -42,15 +51,6 @@ model.on('data', function (data) {
   all.push(data)
   render(all)
 })
-
-// Add some initial data to viewlist
-var amt = 200000
-for (var i = 0; i < amt; i++) {
-  model.write({
-    name: 'user ',
-    message: 'This is my message #' + i
-  })
-}
 
 // Every 1s push a write a new record
 setInterval(function () {
