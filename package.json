@@ -8,6 +8,9 @@
     "gh": "browserify example.js -o bundle.js -t babelify",
     "test": "standard --format"
   },
+  "browserify": {
+    "transform": ["babelify"]
+  },
   "author": "Kyle Robinson Young <kyle@dontkry.com> (http://dontkry.com)",
   "license": "MIT",
   "repository": {
