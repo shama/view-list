@@ -1,6 +1,6 @@
-const BaseElement = require('base-element')
-const xtend = require('xtend/mutable')
-const inherits = require('inherits')
+var BaseElement = require('base-element')
+var xtend = require('xtend/mutable')
+var inherits = require('inherits')
 
 function ViewList (params) {
   var self = this
@@ -49,8 +49,8 @@ module.exports = ViewList
 
 // Calculate the view of the total data on scroll
 ViewList.prototype._calculateScroll = function (data) {
-  let total = data.length
-  let rowsPerBody = Math.floor((this.height - 2) / this.rowHeight)
+  var total = data.length
+  var rowsPerBody = Math.floor((this.height - 2) / this.rowHeight)
   this._visibleStart = Math.round(Math.floor(this._scrollTop / this.rowHeight))
   this._visibleEnd = Math.round(Math.min(this._visibleStart + rowsPerBody))
   this._displayStart = Math.round(Math.max(0, Math.floor(this._scrollTop / this.rowHeight) - rowsPerBody * 1.5))
@@ -58,13 +58,14 @@ ViewList.prototype._calculateScroll = function (data) {
 }
 
 ViewList.prototype.render = function (data) {
+  var self = this
   this._lastData = data
   this._calculateScroll(data)
 
   // Slice off rows and create elements for each
-  let rows = data.slice(this._displayStart, this._displayEnd)
-  rows = rows.map((row) => {
-    return this.eachrow.call(this, row)
+  var rows = data.slice(this._displayStart, this._displayEnd)
+  rows = rows.map(function (row) {
+    return self.eachrow.call(self, row)
   })
 
   // Calculate top row
@@ -91,16 +92,16 @@ ViewList.prototype.render = function (data) {
 }
 
 ViewList.prototype.css = function () {
-  let tagName = this.tagName
-  let childTagName = this.childTagName
-  return this.attachCSS(`
-    ${tagName} {
-      margin: 0;
-      padding: 0;
-      overflow: auto;
-    }
-    ${tagName} ${childTagName} {
-      list-style: none;
-    }
-  `)
+  var tagName = this.tagName
+  var childTagName = this.childTagName
+  return this.attachCSS([
+    tagName + ' {',
+      'margin: 0;',
+      'padding: 0;',
+      'overflow: auto;',
+    '}',
+    tagName + ' ' + childTagName + ' {',
+      'list-style: none;',
+    '}'
+  ].join('\n'))
 }

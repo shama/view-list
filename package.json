@@ -4,12 +4,9 @@
   "description": "An infinite scrolling list view element built on a virtual DOM.",
   "main": "index.js",
   "scripts": {
-    "start": "budo example.js --live -- -t babelify",
-    "gh": "browserify example.js -o bundle.js -t babelify",
+    "start": "budo example.js --live",
+    "gh": "browserify example.js -o bundle.js",
     "test": "standard --format"
-  },
-  "browserify": {
-    "transform": ["babelify"]
   },
   "author": "Kyle Robinson Young <kyle@dontkry.com> (http://dontkry.com)",
   "license": "MIT",
@@ -23,7 +20,6 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "babelify": "^6.1.0",
     "budo": "^4.0.0",
     "lodash.debounce": "^3.0.3",
     "standard": "^3.7.1",
