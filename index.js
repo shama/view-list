@@ -10,13 +10,9 @@ function ViewList (params) {
   BaseElement.call(self, params.appendTo || document.body)
 
   // Calculate height outside of the style.height
-  function OnHeight() {}
-  OnHeight.prototype.hook = function(node) {
-    setTimeout(function() {
-      self.height = node.offsetHeight
-      self.send('load', node)
-    }, 10)
-  }
+  this.on('load', function (node) {
+    self.height = node.offsetHeight
+  })
 
   // The last data rendered
   self._lastData = []
@@ -25,7 +21,6 @@ function ViewList (params) {
     tagName: 'ul',
     childTagName: 'li',
     className: 'view-list',
-    onHeight: new OnHeight(),
     onscroll: function () {
       self._scrollTop = this.scrollTop
       self.render(self._lastData)
