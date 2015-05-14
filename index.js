@@ -92,12 +92,12 @@ ViewList.prototype.css = function () {
   var childTagName = this.childTagName
   return attachCSS([
     tagName + ' {',
-      'margin: 0;',
-      'padding: 0;',
-      'overflow: auto;',
+    'margin: 0;',
+    'padding: 0;',
+    'overflow: auto;',
     '}',
     tagName + ' ' + childTagName + ' {',
-      'list-style: none;',
+    'list-style: none;',
     '}'
   ].join('\n'), this.vtree)
 }
