@@ -15,6 +15,7 @@
     "url": "git@github.com:shama/view-list.git"
   },
   "dependencies": {
+    "attach-css": "^1.0.0",
     "base-element": "^2.1.1",
     "inherits": "^2.0.1",
     "xtend": "^4.0.0"

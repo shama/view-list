@@ -1,6 +1,7 @@
 var BaseElement = require('base-element')
 var xtend = require('xtend/mutable')
 var inherits = require('inherits')
+var attachCSS = require('attach-css')
 
 function ViewList (params) {
   var self = this
@@ -94,7 +95,7 @@ ViewList.prototype.render = function (data) {
 ViewList.prototype.css = function () {
   var tagName = this.tagName
   var childTagName = this.childTagName
-  return this.attachCSS([
+  return attachCSS([
     tagName + ' {',
       'margin: 0;',
       'padding: 0;',
@@ -103,5 +104,5 @@ ViewList.prototype.css = function () {
     tagName + ' ' + childTagName + ' {',
       'list-style: none;',
     '}'
-  ].join('\n'))
+  ].join('\n'), this.vtree)
 }
