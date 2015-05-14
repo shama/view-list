@@ -45,7 +45,7 @@ model.on('data', function (data) {
 })
 
 // Add some initial data to viewlist
-var amt = 2000
+var amt = 200000
 for (var i = 0; i < amt; i++) {
   model.write({
     name: 'user ',
