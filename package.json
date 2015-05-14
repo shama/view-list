@@ -1,23 +1,31 @@
 {
   "name": "view-list",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.4.0",
+  "description": "An infinite scrolling list view element built on a virtual DOM.",
   "main": "index.js",
   "scripts": {
-    "live": "budo example.js --live",
+    "start": "budo example.js --live",
     "gh": "browserify example.js -o bundle.js",
-    "test": "standard"
+    "test": "standard --format"
   },
   "author": "Kyle Robinson Young <kyle@dontkry.com> (http://dontkry.com)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:shama/view-list.git"
+  },
   "dependencies": {
+    "attach-css": "^1.0.0",
+    "base-element": "^2.2.0",
     "inherits": "^2.0.1",
-    "virtual-dom": "^2.0.1",
     "xtend": "^4.0.0"
   },
   "devDependencies": {
     "budo": "^4.0.0",
-    "raf": "^2.0.4",
-    "standard": "^3.7.1"
+    "lodash.debounce": "^3.0.3",
+    "standard": "^3.7.1",
+    "through2": "^0.6.5",
+    "virtual-dom": "^2.0.1",
+    "zuul": "^3.0.0"
   }
 }

@@ -3,15 +3,16 @@
 }
 body {
   font-family: Helvetica, sans-serif;
+  color: #212121;
 }
 
 .view-list {
-  margin: 0;
-  padding: 0;
-  border: 1px solid #333;
+  height: 500px;
 }
 .view-list li {
-  list-style: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #FFEE58;
   padding: .5em;
+}
+.view-list li:nth-child(even) {
+  background-color: #FFFDE7;
 }

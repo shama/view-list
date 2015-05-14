@@ -1,6 +1,6 @@
 # view-list
 
-An infinite scrolling virtual DOM list view.
+An infinite scrolling list view element built on a virtual DOM.
 
 ## Example
 
@@ -11,34 +11,28 @@ Render the ViewList using virtual-dom:
 ```js
 var ViewList = require('view-list')
 
-var diff = require('virtual-dom/diff')
-var patch = require('virtual-dom/patch')
-var createElement = require('virtual-dom/create-element')
-var raf = require('raf')
-
-// Customize an instance of our view list
+// Create an instance of our view list in document.body
 var viewlist = new ViewList({
-  data: ['one', 'two', 'three'],
+  appendTo: document.body
 })
 
-// Main render function
-function render () {
-  return viewlist.render()
-}
+// Create some data to add to the list
+var data = ['one', 'two', 'three']
 
-// Initial DOM tree render
-var tree = render()
-var rootNode = createElement(tree)
-document.body.appendChild(rootNode)
+// Render the data
+viewlist.render(data)
 
-// Main render loop
-raf(function tick () {
-  var newTree = render()
-  var patches = diff(tree, newTree)
-  rootNode = patch(rootNode, patches)
-  tree = newTree
-  raf(tick)
+// Listen for scroll events coming up
+viewlist.on('scroll', function (element) {
+  console.log('List was scrolled to ' + element.scrollTop)
 })
+
+// Every second, append a new row
+var i = 0
+setInterval(function() {
+  data.push('row ' + i++)
+  viewlist.render(data)
+}, 1000)
 ```
 
 ## API
@@ -47,23 +41,30 @@ raf(function tick () {
 
 `params` can be (in addition to the `virtual-dom` parameters):
 
-* `data`: An array of all your rows.
 * `tagName`: The tag to use. Default `'ul'`.
 * `childTagName`: The tag to use for child elements. Default `'li'`.
 * `className`: The classes to use on main element. Default `'view-list'`.
+* `element`: The DOM element of the list.
 * `height`: The total height of the container. Default `500`.
 * `rowHeight`: The height of each row. Default `30`.
 * `eachrow`: A function that gets called for each row to return a custom element per row. Default:
 
   ```
   function (row) {
-    return h(this.childTagName, {
+    return this.html(this.childTagName, {
       style: {
         height: this.rowHeight
       }
     }, [row])
   }
   ```
+
+#### Events
+
+Listen for events with `list.on(name, function () {})`.
+
+* `load`: Called when element has loaded.
+* `scroll`: Called when element has been scrolled.
 
 # license
 (c) 2015 Kyle Robinson Young. MIT License
