@@ -23,7 +23,7 @@ var data = ['one', 'two', 'three']
 viewlist.render(data)
 
 // Listen for scroll events coming up
-viewlist.on('scroll', function (element) {
+viewlist.addEventListener('scroll', function (element) {
   console.log('List was scrolled to ' + element.scrollTop)
 })
 
@@ -61,7 +61,7 @@ setInterval(function() {
 
 #### Events
 
-Listen for events with `list.on(name, function () {})`.
+Listen for events with `list.addEventListener(name, function () {})`.
 
 * `load`: Called when element has loaded.
 * `scroll`: Called when element has been scrolled.

@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "attach-css": "^1.0.0",
-    "base-element": "^2.2.0",
+    "base-element": "^3.0.1",
     "inherits": "^2.0.1",
     "xtend": "^4.0.0"
   },
