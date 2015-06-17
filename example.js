@@ -5,6 +5,7 @@ var style
 
 // Create an instance of our view list
 var viewlist = new ViewList({
+  appendTo: document.body,
   className: 'view-list',
   eachrow: function (row) {
     return this.html('li', [
@@ -15,7 +16,7 @@ var viewlist = new ViewList({
 })
 
 // On load scroll to the bottom
-viewlist.on('load', function (node) {
+viewlist.addEventListener('load', function (node) {
   node.scrollTop = node.scrollHeight
 })
 

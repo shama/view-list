@@ -10,7 +10,7 @@ function ViewList (params) {
   BaseElement.call(self, params.appendTo)
 
   // Calculate height outside of the style.height
-  this.on('load', function (node) {
+  this.addEventListener('load', function (node) {
     self.height = node.offsetHeight
   })
 
