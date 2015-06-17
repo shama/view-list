@@ -7,7 +7,7 @@ function ViewList (params) {
   var self = this
   if (!(self instanceof ViewList)) return new ViewList(params)
   params = params || {}
-  BaseElement.call(self, params.appendTo || document.body)
+  BaseElement.call(self, params.appendTo)
 
   // Calculate height outside of the style.height
   this.on('load', function (node) {
