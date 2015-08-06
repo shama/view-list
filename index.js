@@ -68,7 +68,7 @@ ViewList.prototype.render = function (data) {
   rows.unshift(this.html(this.childTagName, {
     className: 'top',
     style: {
-      height: this._displayStart * this.rowHeight,
+      height: this._displayStart * this.rowHeight + 'px',
       padding: 0,
       margin: 0
     }
@@ -78,7 +78,7 @@ ViewList.prototype.render = function (data) {
   rows.push(this.html(this.childTagName, {
     className: 'bottom',
     style: {
-      height: (data.length - this._displayEnd) * this.rowHeight,
+      height: (data.length - this._displayEnd) * this.rowHeight + 'px',
       padding: 0,
       margin: 0
     }
