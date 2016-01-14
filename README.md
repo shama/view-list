@@ -1,4 +1,4 @@
-# view-list [![Build Status](http://img.shields.io/travis/shama/view-list.svg)](https://travis-ci.org/shama/view-list
+# view-list [![Build Status](http://img.shields.io/travis/shama/view-list.svg)](https://travis-ci.org/shama/view-list)
 
 An infinite scrolling list view element built on a virtual DOM.
 
