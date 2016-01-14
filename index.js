@@ -21,6 +21,8 @@ function ViewList (params) {
     tagName: 'ul',
     childTagName: 'li',
     className: 'view-list',
+    topClassName: 'top',
+    bottomClassName: 'bottom',
     onscroll: function () {
       self._scrollTop = this.scrollTop
       self.render(self._lastData)
@@ -66,7 +68,7 @@ ViewList.prototype.render = function (data) {
 
   // Calculate top row
   rows.unshift(this.html(this.childTagName, {
-    className: 'top',
+    className: this.topClassName,
     style: {
       height: this._displayStart * this.rowHeight + 'px',
       padding: 0,
@@ -76,7 +78,7 @@ ViewList.prototype.render = function (data) {
 
   // Calculate bottom row
   rows.push(this.html(this.childTagName, {
-    className: 'bottom',
+    className: this.bottomClassName,
     style: {
       height: (data.length - this._displayEnd) * this.rowHeight + 'px',
       padding: 0,
