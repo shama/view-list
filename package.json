@@ -14,6 +14,9 @@
     "type": "git",
     "url": "git@github.com:shama/view-list.git"
   },
+  "files": [
+    "index.js"
+  ],
   "dependencies": {
     "attach-css": "^1.0.0",
     "base-element": "^3.0.1",
