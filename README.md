@@ -44,6 +44,8 @@ setInterval(function() {
 * `tagName`: The tag to use. Default `'ul'`.
 * `childTagName`: The tag to use for child elements. Default `'li'`.
 * `className`: The classes to use on main element. Default `'view-list'`.
+* `topClassName`: The classes to use on top element. Default `'.top'`.
+* `bottomClassName`: The classes to use on bottom element. Default `'.bottom'`.
 * `element`: The DOM element of the list.
 * `height`: The total height of the container. Default `500`.
 * `rowHeight`: The height of each row. Default `30`.
