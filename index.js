@@ -63,7 +63,7 @@ ViewList.prototype.render = function (data) {
   // Slice off rows and create elements for each
   var rows = data.slice(this._displayStart, this._displayEnd)
   rows = rows.map(function (row) {
-    return self.eachrow.call(self, row)
+    return self.eachrow(row)
   })
 
   // Calculate top row
