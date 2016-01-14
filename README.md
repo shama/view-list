@@ -69,4 +69,4 @@ Listen for events with `list.addEventListener(name, function () {})`.
 * `scroll`: Called when element has been scrolled.
 
 # license
-(c) 2015 Kyle Robinson Young. MIT License
+(c) 2016 Kyle Robinson Young. MIT License
